@@ -10,6 +10,14 @@ export interface RollResponse {
   rolls: number[];
 }
 
+const generateRolls = (modifier: number): number[] => {
+  if (modifier < 1) {
+    return [rollD6(), rollD6()];
+  } else {
+    return Array.from(Array(modifier), rollD6);
+  }
+};
+
 const rollD6 = (): number => 1 + Math.floor(Math.random() * 6);
 
 const getRollResult = (roll: number): RollResultType => {
@@ -27,14 +35,17 @@ const isCritical = (rolls: number[]): boolean => {
   return rolls.reduce(count6s, 0) > 1 ? true : false;
 };
 
-export const rollD6s = (modifier: number): RollResponse => {
+export const rollD6s = (
+  modifier: number,
+  getRolls: (modifier: number) => number[] = generateRolls
+): RollResponse => {
+  const rolls = getRolls(modifier);
+
   if (modifier < 1) {
-    const rolls = [rollD6(), rollD6()];
     const result = getRollResult(Math.min(...rolls));
     return { result, rolls };
   }
 
-  const rolls = Array.from(Array(modifier), rollD6);
   const result = getRollResult(Math.max(...rolls));
   if (result === RollResultType.SUCCESS && isCritical(rolls))
     return { result: RollResultType.CRITICAL, rolls };
