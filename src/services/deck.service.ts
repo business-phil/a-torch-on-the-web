@@ -11,7 +11,7 @@ export interface Card {
   value: string;
 }
 
-const FULL_DECK: Card[] = [
+export const FULL_DECK: Card[] = [
   { suit: CardSuiteType.CLUBS, value: "A" },
   { suit: CardSuiteType.CLUBS, value: "2" },
   { suit: CardSuiteType.CLUBS, value: "3" },
