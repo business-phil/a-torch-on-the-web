@@ -68,9 +68,10 @@ export const FULL_DECK: Card[] = [
   { suit: CardSuiteType.JOKER, value: "Joker" },
 ];
 
-export const getShuffledDeck = () => shuffleDeck(shuffleDeck([...FULL_DECK]));
+export const generateShuffledDeck = () =>
+  shuffleDeck(shuffleDeck([...FULL_DECK]));
 
-const shuffleDeck = (arr: Card[]): Card[] => {
+export const shuffleDeck = (arr: Card[]): Card[] => {
   let counter = arr.length;
 
   while (counter > 0) {

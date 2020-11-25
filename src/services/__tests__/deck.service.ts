@@ -1,9 +1,13 @@
-import { CardSuiteType, FULL_DECK, getShuffledDeck } from "../deck.service";
+import {
+  CardSuiteType,
+  FULL_DECK,
+  generateShuffledDeck,
+} from "../deck.service";
 
-describe("getShuffledDeck", () => {
+describe("generateShuffledDeck", () => {
   it("returns a full deck of cards", () => {
     let suitCount = {};
-    getShuffledDeck().forEach(card => {
+    generateShuffledDeck().forEach(card => {
       if (Boolean(suitCount[card.suit])) {
         suitCount[card.suit]++;
       } else {
@@ -18,6 +22,6 @@ describe("getShuffledDeck", () => {
   });
 
   it("returns a shuffled deck", () => {
-    expect(getShuffledDeck()).not.toEqual(FULL_DECK);
+    expect(generateShuffledDeck()).not.toEqual(FULL_DECK);
   });
 });

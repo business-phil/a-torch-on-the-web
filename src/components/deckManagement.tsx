@@ -1,6 +1,10 @@
 import React, { FC, useState } from "react";
 
-import { Card, CardSuiteType, getShuffledDeck } from "../services/deck.service";
+import {
+  Card,
+  CardSuiteType,
+  generateShuffledDeck,
+} from "../services/deck.service";
 
 const cardColor = (suit: CardSuiteType) => {
   if (suit === CardSuiteType.DIAMONDS || suit === CardSuiteType.HEARTS) {
@@ -12,24 +16,19 @@ const cardColor = (suit: CardSuiteType) => {
   }
 };
 
-const DiscardPile: FC<{ cards: Card[] }> = ({ cards }) => {
-  if (cards.length < 1) return <></>;
-
-  const topCard = cards[0];
-  return (
-    <p>
-      Top card:{" "}
-      <b style={{ color: cardColor(topCard.suit) }}>
-        {topCard.suit === CardSuiteType.JOKER
-          ? "Joker"
-          : `${topCard.value} of ${topCard.suit}`}
-      </b>
-    </p>
-  );
-};
+const FaceUpCard: FC<{ card: Card }> = ({ card }) => (
+  <p>
+    Top card:{" "}
+    <b style={{ color: cardColor(card.suit) }}>
+      {card.suit === CardSuiteType.JOKER
+        ? "Joker"
+        : `${card.value} of ${card.suit}`}
+    </b>
+  </p>
+);
 
 export const DeckManagement = () => {
-  const [deck, setDeck] = useState<Card[]>(getShuffledDeck());
+  const [deck, setDeck] = useState<Card[]>(generateShuffledDeck());
   const [discardPile, setDiscardPile] = useState<Card[]>([]);
 
   const drawCard = () => {
@@ -46,16 +45,18 @@ export const DeckManagement = () => {
 
   const resetDeck = () => {
     setDiscardPile([]);
-    setDeck(getShuffledDeck());
+    setDeck(generateShuffledDeck());
   };
 
   return (
     <div>
       <h3>Deck Management</h3>
       <p>Cards in deck: {deck.length}</p>
-      <button onClick={drawCard}>Draw card</button>
+      <button disabled={deck.length < 1} onClick={drawCard}>
+        Draw card
+      </button>
       <p>Cards in discard pile: {discardPile.length}</p>
-      <DiscardPile cards={discardPile} />
+      {discardPile.length > 0 && <FaceUpCard card={discardPile[0]} />}
       <button onClick={resetDeck}>Shuffle deck</button>
     </div>
   );
