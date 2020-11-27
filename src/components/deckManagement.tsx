@@ -32,10 +32,8 @@ export const DeckManagement = () => {
   const [discardPile, setDiscardPile] = useState<Card[]>([]);
 
   const drawCard = () => {
-    if (deck.length < 1) {
-      console.log("Unable to draw a card: deck is empty");
-      return;
-    }
+    if (deck.length < 1) return;
+
     const [drawnCard, ...remainingCards] = [...deck];
     console.log(`Drew ${drawnCard.value} of ${drawnCard.suit}`);
 
@@ -50,7 +48,7 @@ export const DeckManagement = () => {
 
   return (
     <div>
-      <h3>Deck Management</h3>
+      <h2>Deck Management</h2>
       <p>Cards in deck: {deck.length}</p>
       <button disabled={deck.length < 1} onClick={drawCard}>
         Draw card

@@ -27,7 +27,7 @@ export const DiceManagement = () => {
 
   return (
     <div>
-      <h3>Dice Management</h3>
+      <h2>Dice Management</h2>
       <button onClick={() => rollDice(0)}>Roll 0 dice</button>
       <button onClick={() => rollDice(1)}>Roll 1 dice</button>
       <button onClick={() => rollDice(3)}>Roll 3 dice</button>

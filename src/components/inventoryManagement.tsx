@@ -11,10 +11,6 @@ export const InventoryManagement = () => {
     generateEmptyInventory()
   );
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setItemName(e.currentTarget.value);
-  };
-
   const addItem = (item: string, rowIndex: number, columnIndex: number) => {
     const newRow = Object.assign([...inventory[rowIndex]], {
       [columnIndex]: item,
@@ -27,9 +23,16 @@ export const InventoryManagement = () => {
 
   return (
     <div>
-      <h3>Inventory Management</h3>
-      Add item to inventory:{" "}
-      <input type="text" value={itemName} onChange={handleChange} />
+      <h2>Inventory Management</h2>
+      <div style={{ display: "block" }}>
+        <label htmlFor="inventory.newItem">Add item to inventory:</label>{" "}
+        <input
+          type="text"
+          id="inventory.newItem"
+          value={itemName}
+          onChange={e => setItemName(e.currentTarget.value)}
+        />
+      </div>
       {inventory.map((row, rowIndex) => (
         <div style={{ display: "block" }} key={rowIndex}>
           {row.map((item, columnIndex) => (
