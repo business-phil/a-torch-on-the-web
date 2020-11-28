@@ -52,7 +52,7 @@ const CharacterOverview: FC<{
   return (
     <>
       <h3>{name}</h3>
-      <p style={{ color: hasMaxStress ? "red" : "black" }}>
+      <p className={hasMaxStress ? "redText" : "blackText"}>
         Stress: {stress}{" "}
         <button disabled={stress < 1} onClick={() => changeStress(stress - 1)}>
           Decrement
@@ -64,7 +64,7 @@ const CharacterOverview: FC<{
           Increment
         </button>
       </p>
-      <p style={{ color: hasMaxCorruption ? "red" : "darkred" }}>
+      <p className={hasMaxCorruption ? "redText" : "darkredText"}>
         Corruption: {corruption}{" "}
         <button
           disabled={corruption < 1}
@@ -79,7 +79,7 @@ const CharacterOverview: FC<{
           Increment
         </button>
       </p>
-      <p style={{ color: showNewSkillPrompt ? "green" : "black" }}>
+      <p className={showNewSkillPrompt ? "greenText" : "blackText"}>
         Experience: {experience}{" "}
         <button
           disabled={experience < 1}
@@ -92,7 +92,7 @@ const CharacterOverview: FC<{
         </button>
       </p>
       {showNewSkillPrompt && (
-        <div style={{ display: "block" }}>
+        <div className="block">
           <label htmlFor="character.newSkill">New Skill:</label>{" "}
           <input
             type="text"
@@ -147,7 +147,7 @@ const CreateCharacterForm: FC<{
 
   return (
     <form onSubmit={handleSubmit}>
-      <div style={{ display: "block" }}>
+      <div className="block">
         <label htmlFor="character.name">Character name:</label>{" "}
         <input
           type="text"
@@ -156,19 +156,19 @@ const CreateCharacterForm: FC<{
           onChange={e => setName(e.currentTarget.value)}
         />
       </div>
-      <div style={{ display: "block" }}>
-        <label htmlFor="character.name[0]">Skills:</label>{" "}
+      <div className="block">
+        <label htmlFor="character.skill[0]">Skills:</label>{" "}
         {skills.map((skill, index) => (
           <input
             type="text"
             key={index}
-            id={`character.name[${index}]`}
+            id={`character.skill[${index}]`}
             value={skill}
             onChange={handleSkillChange(index)}
           />
         ))}
       </div>
-      <div style={{ display: "block" }}>
+      <div className="block">
         <button type="submit" disabled={!isFormValid}>
           Create new character
         </button>

@@ -8,18 +8,18 @@ import {
 
 const cardColor = (suit: CardSuiteType) => {
   if (suit === CardSuiteType.DIAMONDS || suit === CardSuiteType.HEARTS) {
-    return "red";
+    return "redText";
   } else if (suit === CardSuiteType.JOKER) {
-    return "green";
+    return "greenText";
   } else {
-    return "black";
+    return "blackText";
   }
 };
 
 const FaceUpCard: FC<{ card: Card }> = ({ card }) => (
   <p>
     Top card:{" "}
-    <b style={{ color: cardColor(card.suit) }}>
+    <b className={cardColor(card.suit)}>
       {card.suit === CardSuiteType.JOKER
         ? "Joker"
         : `${card.value} of ${card.suit}`}

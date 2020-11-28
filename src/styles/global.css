@@ -1,0 +1,47 @@
+html {
+  background-color: lavenderblush;
+}
+
+.block {
+  display: block;
+}
+
+.blackText {
+  color: black;
+}
+
+.redText {
+  color: red;
+}
+
+.darkredText {
+  color: darkred;
+}
+
+.greenText {
+  color: green;
+}
+
+.purpleText {
+  color: purple;
+}
+
+.orangeText {
+  color: orange;
+}
+
+.inventoryBox {
+  background-color: whitesmoke;
+  display: inline-block;
+  height: 100px;
+  margin: 4px;
+  text-align: center;
+  vertical-align: top;
+  width: 120px;
+}
+
+.itemName {
+  height: 2em;
+  line-height: 1em;
+  margin: 0.75em 0.25em;
+}

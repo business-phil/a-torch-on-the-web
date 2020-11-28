@@ -5,13 +5,13 @@ import { rollD6s, RollResultType } from "../services/dice.service";
 const resultColor = (result: RollResultType) => {
   switch (result) {
     case RollResultType.CRITICAL:
-      return "purple";
+      return "purpleText";
     case RollResultType.SUCCESS:
-      return "green";
+      return "greenText";
     case RollResultType.MIXED_SUCCESS:
-      return "orange";
+      return "orangeText";
     case RollResultType.SUCCESS:
-      return "red";
+      return "redText";
   }
 };
 
@@ -35,9 +35,7 @@ export const DiceManagement = () => {
       {Boolean(rollResult) && (
         <p>
           Roll result:{" "}
-          <b style={{ color: resultColor(rollResult) }}>
-            {rollResult.toUpperCase()}
-          </b>
+          <b className={resultColor(rollResult)}>{rollResult.toUpperCase()}</b>
         </p>
       )}
       {diceRolls.length > 0 && <p>Dice rolls: {diceRolls.join(" ")}</p>}

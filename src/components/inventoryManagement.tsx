@@ -24,7 +24,7 @@ export const InventoryManagement = () => {
   return (
     <div>
       <h2>Inventory Management</h2>
-      <div style={{ display: "block" }}>
+      <div className="block">
         <label htmlFor="inventory.newItem">Add item to inventory:</label>{" "}
         <input
           type="text"
@@ -34,29 +34,10 @@ export const InventoryManagement = () => {
         />
       </div>
       {inventory.map((row, rowIndex) => (
-        <div style={{ display: "block" }} key={rowIndex}>
+        <div className="block" key={rowIndex}>
           {row.map((item, columnIndex) => (
-            <div
-              style={{
-                backgroundColor: "whitesmoke",
-                display: "inline-block",
-                height: "100px",
-                margin: "4px",
-                textAlign: "center",
-                verticalAlign: "top",
-                width: "120px",
-              }}
-              key={`${rowIndex}:${columnIndex}`}
-            >
-              <p
-                style={{
-                  height: "2em",
-                  lineHeight: "1em",
-                  margin: "0.75em 0.25em",
-                }}
-              >
-                {item}
-              </p>
+            <div className="inventoryBox" key={`${rowIndex}:${columnIndex}`}>
+              <p className="itemName">{item}</p>
               <button onClick={() => addItem(itemName, rowIndex, columnIndex)}>
                 Add item
               </button>
