@@ -1,11 +1,18 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 
-import { Character, generateCharacter } from "../services/character.service";
+import {
+  Character,
+  fetchCharacter,
+  generateCharacter,
+  hasCharacterChanged,
+  saveCharacter,
+} from "../services/character.service";
 
 const CharacterOverview: FC<{
   character: Character;
+  clearCharacter: () => void;
   updateCharacter: (newCharacter: Partial<Character>) => void;
-}> = ({ character, updateCharacter }) => {
+}> = ({ character, clearCharacter, updateCharacter }) => {
   const [newSkill, setNewSkill] = useState<string>("");
 
   const { corruption, experience, name, skills, stress } = character;
@@ -51,7 +58,9 @@ const CharacterOverview: FC<{
 
   return (
     <>
-      <h3>{name}</h3>
+      <h3>
+        {name} <button onClick={clearCharacter}>Clear character</button>
+      </h3>
       <p className={hasMaxStress ? "redText" : "blackText"}>
         Stress: {stress}{" "}
         <button disabled={stress < 1} onClick={() => changeStress(stress - 1)}>
@@ -180,12 +189,30 @@ const CreateCharacterForm: FC<{
 export const CharacterManagement = () => {
   const [character, setCharacter] = useState<Character>();
 
+  useEffect(() => {
+    if (!hasCharacterChanged(character)) return;
+
+    if (Boolean(character)) {
+      saveCharacter(character);
+    } else {
+      setCharacter(fetchCharacter());
+    }
+  });
+
   const updateCharacter = (newCharacter: Partial<Character>) => {
     setCharacter({ ...character, ...newCharacter });
   };
 
-  const createCharacter = ({ name, skills }: Partial<Character>) => {
+  const createCharacter = ({
+    name,
+    skills,
+  }: Pick<Character, "name" | "skills">) => {
     setCharacter(generateCharacter({ name, skills }));
+  };
+
+  const clearCharacter = () => {
+    saveCharacter(null);
+    setCharacter(null);
   };
 
   return (
@@ -194,6 +221,7 @@ export const CharacterManagement = () => {
       {Boolean(character) ? (
         <CharacterOverview
           character={character}
+          clearCharacter={clearCharacter}
           updateCharacter={updateCharacter}
         />
       ) : (

@@ -5,6 +5,11 @@
  */
 
 module.exports = {
-  /* Your site config here */
+  siteMetadata: {
+    title: "A Torch on the Web",
+    siteUrl: "https://a-torch-on-the-web.netlify.app",
+    description:
+      'A Torch on the Web is a companion app for Michael Elliott\'s "A Torch in the Dark," a solo dungeon crawling tabletop RPG that uses the Forged in the Dark rules system.',
+  },
   plugins: [],
 };
