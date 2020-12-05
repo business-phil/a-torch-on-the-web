@@ -30,7 +30,9 @@ export const DiceManagement = () => {
       <h2>Dice Management</h2>
       <button onClick={() => rollDice(0)}>Roll 0 dice</button>
       <button onClick={() => rollDice(1)}>Roll 1 dice</button>
+      <button onClick={() => rollDice(2)}>Roll 2 dice</button>
       <button onClick={() => rollDice(3)}>Roll 3 dice</button>
+      <button onClick={() => rollDice(4)}>Roll 4 dice</button>
       <button onClick={() => rollDice(5)}>Roll 5 dice</button>
       {Boolean(rollResult) && (
         <p>
