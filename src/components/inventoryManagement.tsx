@@ -43,7 +43,7 @@ export const InventoryManagement = () => {
               </button>
               {Boolean(item) && (
                 <button onClick={() => addItem("", rowIndex, columnIndex)}>
-                  Remove item
+                  Remove
                 </button>
               )}
             </div>

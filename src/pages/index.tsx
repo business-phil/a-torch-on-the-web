@@ -8,13 +8,23 @@ import { SEO } from "../components/seo";
 
 export default function Home() {
   return (
-    <>
+    <div className="grid-container full">
       <SEO />
       <h1>Welcome to A Torch on the Web!</h1>
-      <CharacterManagement />
-      <InventoryManagement />
-      <DeckManagement />
-      <DiceManagement />
-    </>
+      <div className="grid-container halves">
+        <div className="item">
+          <CharacterManagement />
+        </div>
+        <div className="item">
+          <InventoryManagement />
+        </div>
+        <div className="item">
+          <DeckManagement />
+        </div>
+        <div className="item">
+          <DiceManagement />
+        </div>
+      </div>
+    </div>
   );
 }

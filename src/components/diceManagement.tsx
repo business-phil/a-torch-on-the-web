@@ -26,21 +26,38 @@ export const DiceManagement = () => {
   };
 
   return (
-    <div>
+    <>
       <h2>Dice Management</h2>
-      <button onClick={() => rollDice(0)}>Roll 0 dice</button>
-      <button onClick={() => rollDice(1)}>Roll 1 dice</button>
-      <button onClick={() => rollDice(2)}>Roll 2 dice</button>
-      <button onClick={() => rollDice(3)}>Roll 3 dice</button>
-      <button onClick={() => rollDice(4)}>Roll 4 dice</button>
-      <button onClick={() => rollDice(5)}>Roll 5 dice</button>
-      {Boolean(rollResult) && (
-        <p>
-          Roll result:{" "}
-          <b className={resultColor(rollResult)}>{rollResult.toUpperCase()}</b>
-        </p>
-      )}
-      {diceRolls.length > 0 && <p>Dice rolls: {diceRolls.join(" ")}</p>}
-    </div>
+      <div className="grid-container halves">
+        <div>
+          <button className="button-primary" onClick={() => rollDice(0)}>
+            Roll 0 dice
+          </button>
+          <button className="button-primary" onClick={() => rollDice(1)}>
+            Roll 1 dice
+          </button>
+          <button className="button-primary" onClick={() => rollDice(2)}>
+            Roll 2 dice
+          </button>
+          <button className="button-primary" onClick={() => rollDice(3)}>
+            Roll 3 dice
+          </button>
+          <button className="button-primary" onClick={() => rollDice(4)}>
+            Roll 4 dice
+          </button>
+          <button className="button-primary" onClick={() => rollDice(5)}>
+            Roll 5 dice
+          </button>
+        </div>
+        <div>
+          {Boolean(rollResult) && (
+            <p className={resultColor(rollResult)}>
+              <b>{rollResult.toUpperCase()}</b>
+            </p>
+          )}
+          {diceRolls.length > 0 && <p>Dice rolls: {diceRolls.join(" ")}</p>}
+        </div>
+      </div>
+    </>
   );
 };

@@ -1,21 +1,9 @@
-html {
-  background-color: whitesmoke;
-}
-
 .block {
   display: block;
 }
 
-.blackText {
-  color: black;
-}
-
 .redText {
   color: red;
-}
-
-.darkredText {
-  color: darkred;
 }
 
 .greenText {
@@ -23,7 +11,7 @@ html {
 }
 
 .purpleText {
-  color: purple;
+  color: mediumpurple;
 }
 
 .orangeText {
@@ -31,17 +19,17 @@ html {
 }
 
 .inventoryBox {
-  background-color: lightgray;
+  border: 1px solid var(--border-color);
+  background-color: var(--border-color-softer);
   display: inline-block;
-  height: 100px;
+  /* height: 10rem; */
   margin: 4px;
   text-align: center;
   vertical-align: top;
-  width: 120px;
 }
 
 .itemName {
-  height: 2em;
-  line-height: 1em;
-  margin: 0.75em 0.25em;
+  height: 2rem;
+  line-height: 1rem;
+  margin: 0.75rem 0.25rem;
 }

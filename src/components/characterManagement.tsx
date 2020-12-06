@@ -8,6 +8,25 @@ import {
   saveCharacter,
 } from "../services/character.service";
 
+const SkillButtons: FC<{
+  atMaximumValue?: boolean;
+  value: number;
+  handleChange: (newValue: number) => void;
+}> = ({ atMaximumValue = false, value, handleChange }) => (
+  <>
+    <button disabled={value < 1} onClick={() => handleChange(value - 1)}>
+      Decrement
+    </button>
+    <button
+      className="button-primary"
+      disabled={atMaximumValue}
+      onClick={() => handleChange(value + 1)}
+    >
+      Increment
+    </button>
+  </>
+);
+
 const CharacterOverview: FC<{
   character: Character;
   clearCharacter: () => void;
@@ -58,48 +77,26 @@ const CharacterOverview: FC<{
 
   return (
     <>
-      <h3>
-        {name} <button onClick={clearCharacter}>Clear character</button>
-      </h3>
-      <p className={hasMaxStress ? "redText" : "blackText"}>
-        Stress: {stress}{" "}
-        <button disabled={stress < 1} onClick={() => changeStress(stress - 1)}>
-          Decrement
-        </button>
-        <button
-          disabled={hasMaxStress}
-          onClick={() => changeStress(stress + 1)}
-        >
-          Increment
-        </button>
-      </p>
-      <p className={hasMaxCorruption ? "redText" : "darkredText"}>
+      <h3>{name}</h3>
+      <button onClick={clearCharacter}>Clear character</button>
+      <p className={hasMaxStress ? "redText" : ""}>Stress: {stress} </p>
+      <SkillButtons
+        atMaximumValue={hasMaxStress}
+        handleChange={changeStress}
+        value={stress}
+      />
+      <p className={hasMaxCorruption ? "redText" : "purpleText"}>
         Corruption: {corruption}{" "}
-        <button
-          disabled={corruption < 1}
-          onClick={() => changeCorruption(corruption - 1)}
-        >
-          Decrement
-        </button>
-        <button
-          disabled={hasMaxCorruption}
-          onClick={() => changeCorruption(corruption + 1)}
-        >
-          Increment
-        </button>
       </p>
-      <p className={showNewSkillPrompt ? "greenText" : "blackText"}>
+      <SkillButtons
+        atMaximumValue={hasMaxCorruption}
+        handleChange={changeCorruption}
+        value={corruption}
+      />
+      <p className={showNewSkillPrompt ? "greenText" : ""}>
         Experience: {experience}{" "}
-        <button
-          disabled={experience < 1}
-          onClick={() => changeExperience(experience - 1)}
-        >
-          Decrement
-        </button>
-        <button onClick={() => changeExperience(experience + 1)}>
-          Increment
-        </button>
       </p>
+      <SkillButtons handleChange={changeExperience} value={experience} />
       {showNewSkillPrompt && (
         <div className="block">
           <label htmlFor="character.newSkill">New Skill:</label>{" "}
@@ -122,7 +119,10 @@ const CharacterOverview: FC<{
           </li>
         ))}
         {showNewSkillPrompt && skills.length < 10 && (
-          <button onClick={() => addNewSkill(skills.length)}>
+          <button
+            className="button-primary"
+            onClick={() => addNewSkill(skills.length)}
+          >
             Add new skill
           </button>
         )}

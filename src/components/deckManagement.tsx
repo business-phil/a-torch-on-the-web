@@ -10,16 +10,15 @@ const cardColor = (suit: CardSuiteType) => {
   if (suit === CardSuiteType.DIAMONDS || suit === CardSuiteType.HEARTS) {
     return "redText";
   } else if (suit === CardSuiteType.JOKER) {
-    return "greenText";
+    return "purpleText";
   } else {
-    return "blackText";
+    return "";
   }
 };
 
 const FaceUpCard: FC<{ card: Card }> = ({ card }) => (
-  <p>
-    Top card:{" "}
-    <b className={cardColor(card.suit)}>
+  <p className={cardColor(card.suit)}>
+    <b>
       {card.suit === CardSuiteType.JOKER
         ? "Joker"
         : `${card.value} of ${card.suit}`}
@@ -47,15 +46,25 @@ export const DeckManagement = () => {
   };
 
   return (
-    <div>
+    <>
       <h2>Deck Management</h2>
-      <p>Cards in deck: {deck.length}</p>
-      <button disabled={deck.length < 1} onClick={drawCard}>
-        Draw card
-      </button>
-      <p>Cards in discard pile: {discardPile.length}</p>
-      {discardPile.length > 0 && <FaceUpCard card={discardPile[0]} />}
-      <button onClick={resetDeck}>Shuffle deck</button>
-    </div>
+      <div className="grid-container halves">
+        <div>
+          <p>Cards in deck: {deck.length}</p>
+          <button
+            className="button-primary"
+            disabled={deck.length < 1}
+            onClick={drawCard}
+          >
+            Draw card
+          </button>
+          <button onClick={resetDeck}>Shuffle deck</button>
+        </div>
+        <div>
+          <p>Cards in discard pile: {discardPile.length}</p>
+          {discardPile.length > 0 && <FaceUpCard card={discardPile[0]} />}
+        </div>
+      </div>
+    </>
   );
 };
