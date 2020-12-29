@@ -41,11 +41,12 @@ export const InventoryManagement = () => {
               <button onClick={() => addItem(itemName, rowIndex, columnIndex)}>
                 Add item
               </button>
-              {Boolean(item) && (
-                <button onClick={() => addItem("", rowIndex, columnIndex)}>
-                  Remove
-                </button>
-              )}
+              <button
+                className={Boolean(item) ? "" : "invisible"}
+                onClick={() => addItem("", rowIndex, columnIndex)}
+              >
+                Remove
+              </button>
             </div>
           ))}
         </div>
