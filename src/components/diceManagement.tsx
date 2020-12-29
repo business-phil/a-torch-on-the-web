@@ -30,32 +30,23 @@ export const DiceManagement = () => {
       <h2>Dice Management</h2>
       <div className="grid-container halves">
         <div>
-          <button className="button-primary" onClick={() => rollDice(0)}>
-            Roll 0 dice
-          </button>
-          <button className="button-primary" onClick={() => rollDice(1)}>
-            Roll 1 dice
-          </button>
-          <button className="button-primary" onClick={() => rollDice(2)}>
-            Roll 2 dice
-          </button>
-          <button className="button-primary" onClick={() => rollDice(3)}>
-            Roll 3 dice
-          </button>
-          <button className="button-primary" onClick={() => rollDice(4)}>
-            Roll 4 dice
-          </button>
-          <button className="button-primary" onClick={() => rollDice(5)}>
-            Roll 5 dice
-          </button>
-        </div>
-        <div>
           {Boolean(rollResult) && (
             <p className={resultColor(rollResult)}>
               <b>{rollResult.toUpperCase()}</b>
             </p>
           )}
           {diceRolls.length > 0 && <p>Dice rolls: {diceRolls.join(" ")}</p>}
+        </div>
+        <div>
+          {[0, 1, 2, 3, 4, 5].map(numberOfDice => (
+            <button
+              key={numberOfDice}
+              className="button-primary rollButton"
+              onClick={() => rollDice(numberOfDice)}
+            >
+              {`Roll ${numberOfDice} dice`}
+            </button>
+          ))}
         </div>
       </div>
     </>

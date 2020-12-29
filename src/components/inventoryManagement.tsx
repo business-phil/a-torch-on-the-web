@@ -38,8 +38,11 @@ export const InventoryManagement = () => {
           {row.map((item, columnIndex) => (
             <div className="inventoryBox" key={`${rowIndex}:${columnIndex}`}>
               <p className="itemName">{item}</p>
-              <button onClick={() => addItem(itemName, rowIndex, columnIndex)}>
-                Add item
+              <button
+                className="button-primary"
+                onClick={() => addItem(itemName, rowIndex, columnIndex)}
+              >
+                Add
               </button>
               <button
                 className={Boolean(item) ? "" : "invisible"}

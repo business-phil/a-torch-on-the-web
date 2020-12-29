@@ -8,7 +8,7 @@ import {
   saveCharacter,
 } from "../services/character.service";
 
-const SkillButtons: FC<{
+const AttributeButtons: FC<{
   atMaximumValue?: boolean;
   value: number;
   handleChange: (newValue: number) => void;
@@ -79,45 +79,56 @@ const CharacterOverview: FC<{
     <>
       <h3>{name}</h3>
       <button onClick={clearCharacter}>Clear character</button>
-      <p className={hasMaxStress ? "redText" : ""}>Stress: {stress} </p>
-      <SkillButtons
-        atMaximumValue={hasMaxStress}
-        handleChange={changeStress}
-        value={stress}
-      />
-      <p className={hasMaxCorruption ? "redText" : "purpleText"}>
-        Corruption: {corruption}{" "}
-      </p>
-      <SkillButtons
-        atMaximumValue={hasMaxCorruption}
-        handleChange={changeCorruption}
-        value={corruption}
-      />
-      <p className={showNewSkillPrompt ? "greenText" : ""}>
-        Experience: {experience}{" "}
-      </p>
-      <SkillButtons handleChange={changeExperience} value={experience} />
-      {showNewSkillPrompt && (
-        <div className="block">
-          <label htmlFor="character.newSkill">New Skill:</label>{" "}
-          <input
-            type="text"
-            id="character.newSkill"
-            value={newSkill}
-            onChange={e => setNewSkill(e.currentTarget.value)}
-          />
-        </div>
-      )}
-      <p>Skills:</p>
-      <ul>
-        {skills.map((skill, index) => (
-          <li key={`${skill}-${index}`}>
-            {skill}{" "}
-            {showNewSkillPrompt && (
-              <button onClick={() => addNewSkill(index)}>Replace skill</button>
-            )}
-          </li>
-        ))}
+      <div className="attributeSection">
+        <p className={hasMaxStress ? "redText" : ""}>Stress: {stress} </p>
+        <AttributeButtons
+          atMaximumValue={hasMaxStress}
+          handleChange={changeStress}
+          value={stress}
+        />
+      </div>
+      <div className="attributeSection">
+        <p className={hasMaxCorruption ? "redText" : "purpleText"}>
+          Corruption: {corruption}{" "}
+        </p>
+        <AttributeButtons
+          atMaximumValue={hasMaxCorruption}
+          handleChange={changeCorruption}
+          value={corruption}
+        />
+      </div>
+      <div className="attributeSection">
+        <p className={showNewSkillPrompt ? "greenText" : ""}>
+          Experience: {experience}{" "}
+        </p>
+        <AttributeButtons handleChange={changeExperience} value={experience} />
+      </div>
+
+      <div id="skillsSection">
+        <p>Skills:</p>
+        {showNewSkillPrompt && (
+          <label htmlFor="character.newSkill">
+            New skill:
+            <input
+              type="text"
+              id="character.newSkill"
+              value={newSkill}
+              onChange={e => setNewSkill(e.currentTarget.value)}
+            />
+          </label>
+        )}
+        <ul>
+          {skills.map((skill, index) => (
+            <li className="skill" key={`${skill}-${index}`}>
+              {skill}{" "}
+              {showNewSkillPrompt && (
+                <button onClick={() => addNewSkill(index)}>
+                  Replace skill
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
         {showNewSkillPrompt && skills.length < 10 && (
           <button
             className="button-primary"
@@ -126,13 +137,16 @@ const CharacterOverview: FC<{
             Add new skill
           </button>
         )}
-      </ul>
+      </div>
     </>
   );
 };
 
 const CreateCharacterForm: FC<{
-  createCharacter: ({ name, skills }: Partial<Character>) => void;
+  createCharacter: ({
+    name,
+    skills,
+  }: Pick<Character, "name" | "skills">) => void;
 }> = ({ createCharacter }) => {
   const [name, setName] = useState<string>("");
   const [skills, setSkills] = useState<string[]>(["", "", ""]);
@@ -157,28 +171,35 @@ const CreateCharacterForm: FC<{
   return (
     <form onSubmit={handleSubmit}>
       <div className="block">
-        <label htmlFor="character.name">Character name:</label>{" "}
-        <input
-          type="text"
-          id="character.name"
-          value={name}
-          onChange={e => setName(e.currentTarget.value)}
-        />
-      </div>
-      <div className="block">
-        <label htmlFor="character.skill[0]">Skills:</label>{" "}
-        {skills.map((skill, index) => (
+        <label htmlFor="character.name">Character name:</label>
+        <div className="block">
           <input
             type="text"
-            key={index}
-            id={`character.skill[${index}]`}
-            value={skill}
-            onChange={handleSkillChange(index)}
+            id="character.name"
+            value={name}
+            onChange={e => setName(e.currentTarget.value)}
           />
+        </div>
+      </div>
+      <div className="block">
+        <label htmlFor="character.skill[0]">Skills:</label>
+        {skills.map((skill, index) => (
+          <div className="block" key={`${skill}-${index}`}>
+            <input
+              type="text"
+              id={`character.skill[${index}]`}
+              value={skill}
+              onChange={handleSkillChange(index)}
+            />
+          </div>
         ))}
       </div>
       <div className="block">
-        <button type="submit" disabled={!isFormValid}>
+        <button
+          className="button-primary"
+          type="submit"
+          disabled={!isFormValid}
+        >
           Create new character
         </button>
       </div>

@@ -50,6 +50,10 @@ export const DeckManagement = () => {
       <h2>Deck Management</h2>
       <div className="grid-container halves">
         <div>
+          <p>Cards in discard pile: {discardPile.length}</p>
+          {discardPile.length > 0 && <FaceUpCard card={discardPile[0]} />}
+        </div>
+        <div id="cardSection">
           <p>Cards in deck: {deck.length}</p>
           <button
             className="button-primary"
@@ -59,10 +63,6 @@ export const DeckManagement = () => {
             Draw card
           </button>
           <button onClick={resetDeck}>Shuffle deck</button>
-        </div>
-        <div>
-          <p>Cards in discard pile: {discardPile.length}</p>
-          {discardPile.length > 0 && <FaceUpCard card={discardPile[0]} />}
         </div>
       </div>
     </>

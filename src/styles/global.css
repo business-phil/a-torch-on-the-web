@@ -1,3 +1,5 @@
+/* General use */
+
 .block {
   display: block;
 }
@@ -22,25 +24,92 @@
   color: orange;
 }
 
+/* Character Management */
+
+.attributeSection {
+  margin-bottom: 2rem;
+}
+
+.attributeSection > p {
+  margin: 0 0 1rem 0;
+}
+
+.attributeSection > button {
+  padding: 0 1rem;
+  margin: 0rem;
+}
+
+.attributeSection > button:first-of-type {
+  margin-right: 1rem;
+}
+
+#skillsSection > p:first-child {
+  margin-bottom: 1rem;
+}
+
+#skillsSection > ul {
+  margin-bottom: 1rem;
+}
+
+input#character\.newSkill {
+  margin: 0 0 1rem 1rem;
+}
+
+.skill {
+  margin-bottom: 1rem;
+  margin-left: 25%;
+  text-align: left;
+}
+
+.skill > button {
+  padding: 0 1rem;
+  margin: 0 0 0 1rem;
+}
+
+/* Inventory Management */
+
 .inventoryBox {
   border: 1px solid var(--border-color);
   background-color: var(--border-color-softer);
   display: inline-block;
   margin: 0.5rem;
   padding: 0.5rem;
-  width: 25%;
+  width: calc(30% - 1.5rem);
   text-align: center;
   vertical-align: top;
 }
 
 .inventoryBox > button {
-  display: block;
-  width: 100%;
-  padding: initial;
+  padding: 0 0.25rem;
+  margin: 1rem 0 0 0;
+  min-width: 100%;
+}
+
+@media (min-width: 600px) {
+  .inventoryBox > button {
+    margin: 0.5rem 0 0 0;
+    min-width: calc(50% - 1.5rem);
+  }
+
+  .inventoryBox > button:first-of-type {
+    margin-right: 0.5rem;
+  }
 }
 
 .itemName {
   height: 3rem;
   line-height: 1.5rem;
   margin: 0.75rem 0;
+}
+
+/* Deck Management */
+
+#cardSection > button {
+  margin: 1rem;
+}
+
+/* Dice Management */
+
+.rollButton {
+  margin: 1rem;
 }
